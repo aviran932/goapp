@@ -1,0 +1,20 @@
+on: push
+
+name: pipeline
+
+jobs:
+  changedFiles:
+    name: y2_devops_test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: pipeline
+      uses: ./.github/actions/pipeline
+      with:
+          DOCKER_SECRET: ${{ secrets.DOCKER_SECRET }}
+          DOCKER_REPOSITORY: "goapp"
+          DOCKER_USERNAME: "623715"
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+          REGION: "us-east-2"
+          CLUSTER_NAME: "basic-cluster"
